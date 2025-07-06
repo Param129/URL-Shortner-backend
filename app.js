@@ -16,7 +16,7 @@ import { attachUser } from "./src/utils/attachUser.js";
 const app = express();
 
 app.use(cors({
-    origin:true,
+    origin:'https://url-shortener-frontend-gilt.vercel.app/',
     credentials: true
 }));
 
