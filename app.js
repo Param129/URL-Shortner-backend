@@ -15,11 +15,21 @@ import { attachUser } from "./src/utils/attachUser.js";
 
 const app = express();
 
-app.use(cors({
-    origin:'https://url-shortener-frontend-gilt.vercel.app/',
-    credentials: true
-}));
-
+const allowedOrigins = [
+    'http://localhost:5173',
+    'https://url-shortener-frontend-gilt.vercel.app',
+  ];
+  
+  app.use(cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    credentials: true,
+  }));
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
@@ -33,15 +43,9 @@ app.get("/:id", redirectFromShorturl)
 app.use(errorHandler);
 
 
-app.get("/up", (req, res) => {
-    res.status(200).send("Hello from URL Shortener API");
-});
-
-
-
 app.listen(process.env.PORT,()=>{
     connectDB();
-    console.log(`server is running on PORT: ${process.env.PORT}`);
+    console.log(`server is running on PORT: $`);
 })
 
 
