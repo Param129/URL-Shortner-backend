@@ -32,6 +32,12 @@ app.get("/:id", redirectFromShorturl)
 app.use(errorHandler);
 
 
+app.get("/up", (req, res) => {
+    res.status(200).send("Hello from URL Shortener API");
+});
+
+
+
 app.listen(process.env.PORT,()=>{
     connectDB();
     console.log(`server is running on PORT: ${process.env.PORT}`);
