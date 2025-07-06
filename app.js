@@ -32,9 +32,9 @@ app.get("/:id", redirectFromShorturl)
 app.use(errorHandler);
 
 
-app.listen(3000,()=>{
+app.listen(process.env.PORT,()=>{
     connectDB();
-    console.log("server is running on http://localhost:3000");
+    console.log(`server is running on PORT: ${process.env.PORT}`);
 })
 
 
